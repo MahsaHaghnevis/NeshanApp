@@ -9,6 +9,9 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    let searchTextField = UITextField()
+    let tableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
