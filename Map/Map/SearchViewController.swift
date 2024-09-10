@@ -24,6 +24,8 @@ class SearchViewController: UIViewController {
         view.addSubview(searchTextField)
         view.addSubview(tableView)
         
+        
+        
         setupSearchTextField()
         setupTableView()
     }
@@ -44,6 +46,8 @@ class SearchViewController: UIViewController {
         
         ])
         
+        searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
+        
     }
     
     private func setupTableView(){
@@ -57,6 +61,9 @@ class SearchViewController: UIViewController {
                ])
     }
     
+    @objc func searchTextChanged(_ sender : Any){
+        
+    }
     
 
 
