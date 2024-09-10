@@ -30,6 +30,7 @@ class HomeViewController: UIViewController  {
         view.addSubview(buttonsStak)
         
         locationButton.addTarget(self, action: #selector(locationButtonTapped), for: .touchUpInside)
+        
         setupUI()
         
     }
@@ -97,9 +98,16 @@ class HomeViewController: UIViewController  {
         locationButton.layer.cornerRadius = 16
     }
     
-    @objc func locationButtonTapped(_sender : UIButton){
-        
+    @objc func locationButtonTapped() {
+        if let userLocation = locationManager.location?.coordinate {
+            print("User location: \(userLocation.latitude), \(userLocation.longitude)")
+            let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
+            mapView.setRegion(region, animated: true)
+        } else {
+            print("User location is not available")
+        }
     }
+    
 }
 
 extension HomeViewController : CLLocationManagerDelegate {
@@ -111,6 +119,19 @@ extension HomeViewController : CLLocationManagerDelegate {
                 mapView.setRegion(region, animated: true)
             }
         }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .denied, .restricted:
+            print("Location access denied or restricted")
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        @unknown default:
+            break
+        }
+    }
 }
 
 
