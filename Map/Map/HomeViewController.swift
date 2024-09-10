@@ -148,6 +148,20 @@ extension HomeViewController : CLLocationManagerDelegate {
             }
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
+    
+    private func showSearchViewController() {
+        let searchVC = SearchViewController()
+        searchVC.onShowOnMap = { [weak self] results in
+            self?.displayResultsOnMap(results)
+        }
+        present(searchVC, animated: true, completion: nil)
+    }
+    
+    private func displayResultsOnMap(_ results: [SearchResult]) {
+      
+    }
 }
 
 
