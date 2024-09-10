@@ -13,6 +13,7 @@ class HomeViewController: UIViewController  {
     
     let mapView = MKMapView()
     let searchButton = UIButton(type: .system)
+    let locationButton = UIButton(type: .system)
     let locationManager = CLLocationManager()
     let buttonsStak = UIStackView()
     
