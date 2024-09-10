@@ -72,6 +72,12 @@ class SearchViewController: UIViewController {
     
     private func fetchSearchResults(query : String){
         
+        let urlString = "https://api.neshan.org/v1/search?term=\(query)&lat=35.6892&lng=51.3890"
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        
+                
     }
 
 }
