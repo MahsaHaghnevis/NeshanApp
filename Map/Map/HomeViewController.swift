@@ -72,7 +72,16 @@ class HomeViewController: UIViewController  {
         buttonsStak.addArrangedSubview(locationButton)
     }
     
-
+    private func setupSearchButton(){
+        
+        searchButton.setTitle("Search", for: .normal)
+        searchButton.backgroundColor = .systemBlue
+        searchButton.setTitleColor(.white, for: .normal)
+        searchButton.clipsToBounds = true
+        searchButton.layer.cornerRadius = 16
+        
+        //searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+    }
     
 }
 
