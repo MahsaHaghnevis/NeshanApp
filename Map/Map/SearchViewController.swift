@@ -79,7 +79,10 @@ class SearchViewController: UIViewController {
         var request = URLRequest (url : url)
         request.setValue("service.29a629cc9ebc4851958f7a9cefea43b0", forHTTPHeaderField: "Api-Key")
         
-                
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let self = self, let data = data, error == nil else { return }
+            
+        }
     }
 
 }
