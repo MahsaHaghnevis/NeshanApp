@@ -33,6 +33,7 @@ class HomeViewController: UIViewController  {
         
         setupUI()
         
+        
     }
     
     private func setupUI(){
@@ -104,7 +105,7 @@ class HomeViewController: UIViewController  {
             let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
             mapView.setRegion(region, animated: true)
         } else {
-            print("User location is not available")
+            showLocationAccessAlert(title: "Location Access Denied", message: "عدم دسترسی به موقعیت مکانی شما . لطفا در تنظیمات تغییر دهید")
         }
     }
 }
@@ -112,29 +113,35 @@ class HomeViewController: UIViewController  {
 extension HomeViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            if let location = locations.first {
-//                let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-//                let region = MKCoordinateRegion(center: location.coordinate, span: span)
-//                mapView.setRegion(region, animated: true)
-            }
+          
         }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .denied, .restricted:
-            print("Location access denied or restricted")
+            showLocationAccessAlert(title: "Location Access Denied", message: "عدم دسترسی به موقعیت مکانی شما . لطفا در تنظیمات تغییر دهید")
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
         @unknown default:
-            break
+            showLocationAccessAlert(title: "Unknown Status", message: "مشکل فنی در دریافت لوکیشن رخ داده است")
         }
     }
     
     
     private func showLocationAccessAlert(title : String , message : String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
+        if title == "Location Access Denied" {
+                alert.addAction(UIAlertAction(title: "Settings", style: .default) { _ in
+                    if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(appSettings)
+                    }
+                })
+            }
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
