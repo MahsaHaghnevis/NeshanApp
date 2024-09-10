@@ -16,8 +16,16 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
+        
+        setupUI()
     }
-    
+    private func setupUI(){
+        
+        view.addSubview(searchTextField)
+        
+        setupSearchTextField()
+        
+    }
     private func setupSearchTextField(){
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.placeholder = "مکان را جستجو کنید"
