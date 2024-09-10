@@ -11,6 +11,8 @@ class SearchViewController: UIViewController {
 
     let searchTextField = UITextField()
     let tableView = UITableView()
+
+    var searchResults: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,12 +75,19 @@ class SearchViewController: UIViewController {
 extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        searchResults.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
+        cell.textLabel?.text = searchResults[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print(searchResults[indexPath.row])
     }
     
     
