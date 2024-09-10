@@ -11,6 +11,11 @@ import CoreLocation
 
 class HomeViewController: UIViewController  {
     
+    let mapView = MKMapView()
+    let searchButton = UIButton(type: .system)
+    let locationManager = CLLocationManager()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
