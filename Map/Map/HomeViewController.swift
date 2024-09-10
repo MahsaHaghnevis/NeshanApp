@@ -36,6 +36,7 @@ class HomeViewController: UIViewController  {
         setupMap()
         setupStack()
         setupSearchButton()
+        setupLocateButton()
     }
     
     private func setupMap(){
@@ -56,13 +57,13 @@ class HomeViewController: UIViewController  {
     private func setupStack(){
         buttonsStak.axis = .horizontal
         buttonsStak.distribution = .fillEqually
-        buttonsStak.alignment = .center
-        buttonsStak.spacing = 10
+        buttonsStak.alignment = .leading
+        buttonsStak.spacing = 30
         buttonsStak.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-                    buttonsStak.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-                    buttonsStak.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                    buttonsStak.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+                    buttonsStak.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
                     buttonsStak.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
                     buttonsStak.heightAnchor.constraint(equalToConstant: 50)
                 ])
@@ -75,6 +76,7 @@ class HomeViewController: UIViewController  {
     private func setupSearchButton(){
         
         searchButton.setTitle("Search", for: .normal)
+        
         searchButton.backgroundColor = .systemBlue
         searchButton.setTitleColor(.white, for: .normal)
         searchButton.clipsToBounds = true
@@ -83,6 +85,14 @@ class HomeViewController: UIViewController  {
         //searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
     }
     
+    private func setupLocateButton(){
+        
+        locationButton.setTitle("Locate", for: .normal)
+        locationButton.backgroundColor = .systemGreen
+        locationButton.setTitleColor(.white, for: .normal)
+        locationButton.clipsToBounds = true
+        locationButton.layer.cornerRadius = 16
+    }
 }
 
 extension HomeViewController : CLLocationManagerDelegate {
