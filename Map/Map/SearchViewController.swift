@@ -76,6 +76,8 @@ class SearchViewController: UIViewController {
         
         guard let url = URL(string: urlString) else { return }
         
+        var request = URLRequest (url : url)
+        request.setValue("service.29a629cc9ebc4851958f7a9cefea43b0", forHTTPHeaderField: "Api-Key")
         
                 
     }
