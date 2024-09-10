@@ -88,6 +88,14 @@ class SearchViewController: UIViewController {
         ])
     }
     
+    var onShowOnMap: (([SearchResult]) -> Void)?
+    
+    @objc func showOnMapButtonTapped(){
+        
+        
+    }
+    
+    
     @objc func searchTextChanged(_ sender : Any){
         guard let query = searchTextField.text, !query.isEmpty else { return }
         
