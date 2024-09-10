@@ -12,6 +12,9 @@ class SearchViewController: UIViewController {
     let searchTextField = UITextField()
     let tableView = UITableView()
 
+    let showOnMapButton = UIButton(type: .system)
+    
+    
     var searchResults: [SearchResult] = []
     
     override func viewDidLoad() {
@@ -25,6 +28,7 @@ class SearchViewController: UIViewController {
         
         view.addSubview(searchTextField)
         view.addSubview(tableView)
+        view.addSubview(showOnMapButton)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -33,6 +37,8 @@ class SearchViewController: UIViewController {
         
         setupSearchTextField()
         setupTableView()
+        setupShowOnMapButton()
+        
     }
     private func setupSearchTextField(){
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +70,22 @@ class SearchViewController: UIViewController {
                    tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                ])
+    }
+    
+    private func setupShowOnMapButton() {
+        showOnMapButton.setTitle("Show on Map", for: .normal)
+        showOnMapButton.backgroundColor = .systemBlue
+        showOnMapButton.setTitleColor(.white, for: .normal)
+        showOnMapButton.layer.cornerRadius = 10
+        showOnMapButton.translatesAutoresizingMaskIntoConstraints = false
+        showOnMapButton.addTarget(self, action: #selector(showOnMapButtonTapped), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            showOnMapButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            showOnMapButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            showOnMapButton.widthAnchor.constraint(equalToConstant: 150),
+            showOnMapButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
     }
     
     @objc func searchTextChanged(_ sender : Any){
