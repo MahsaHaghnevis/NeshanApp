@@ -27,13 +27,15 @@ class HomeViewController: UIViewController  {
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .none
         view.addSubview(mapView)
-        
+        view.addSubview(buttonsStak)
         setupUI()
         
     }
     
     private func setupUI(){
         setupMap()
+        setupStack()
+        setupSearchButton()
     }
     
     private func setupMap(){
@@ -51,7 +53,26 @@ class HomeViewController: UIViewController  {
         ])
     }
     
-   
+    private func setupStack(){
+        buttonsStak.axis = .horizontal
+        buttonsStak.distribution = .fillEqually
+        buttonsStak.alignment = .center
+        buttonsStak.spacing = 10
+        buttonsStak.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+                    buttonsStak.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                    buttonsStak.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                    buttonsStak.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+                    buttonsStak.heightAnchor.constraint(equalToConstant: 50)
+                ])
+        
+        
+        buttonsStak.addArrangedSubview(searchButton)
+        buttonsStak.addArrangedSubview(locationButton)
+    }
+    
+
     
 }
 
