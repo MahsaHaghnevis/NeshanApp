@@ -86,7 +86,7 @@ class HomeViewController: UIViewController  {
         searchButton.clipsToBounds = true
         searchButton.layer.cornerRadius = 16
         
-        //searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
     }
     
     private func setupLocateButton(){
@@ -99,7 +99,7 @@ class HomeViewController: UIViewController  {
         locationButton.layer.cornerRadius = 16
     }
     
-    @objc func locationButtonTapped() {
+    @objc func locationButtonTapped(_ sender : UIButton) {
         if let userLocation = locationManager.location?.coordinate {
             print("User location: \(userLocation.latitude), \(userLocation.longitude)")
             let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -107,6 +107,10 @@ class HomeViewController: UIViewController  {
         } else {
             showLocationAccessAlert(title: "Location Access Denied", message: "عدم دسترسی به موقعیت مکانی شما . لطفا در تنظیمات تغییر دهید")
         }
+    }
+    
+    @objc func searchButtonTapped(_ sender : UIButton){
+        
     }
 }
 
