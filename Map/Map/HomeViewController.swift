@@ -110,7 +110,8 @@ class HomeViewController: UIViewController  {
     }
     
     @objc func searchButtonTapped(_ sender : UIButton){
-        
+        let searchVC = SearchViewController()
+        navigationController?.pushViewController(searchVC, animated: true)
     }
 }
 
