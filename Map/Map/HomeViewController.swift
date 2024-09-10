@@ -131,6 +131,11 @@ extension HomeViewController : CLLocationManagerDelegate {
             break
         }
     }
+    
+    
+    private func showLocationAccessAlert(title : String , message : String){
+        
+    }
 }
 
 
