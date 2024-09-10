@@ -14,7 +14,7 @@ class HomeViewController: UIViewController  {
     let mapView = MKMapView()
     let searchButton = UIButton(type: .system)
     let locationManager = CLLocationManager()
-
+    let buttonsStak = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +48,9 @@ class HomeViewController: UIViewController  {
             mapView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         
         ])
-        
-        
     }
+    
+   
     
 }
 
