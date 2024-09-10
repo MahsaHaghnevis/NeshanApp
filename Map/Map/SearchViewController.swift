@@ -31,10 +31,21 @@ class SearchViewController: UIViewController {
         searchTextField.placeholder = "مکان را جستجو کنید"
         searchTextField.borderStyle = .roundedRect
         searchTextField.clipsToBounds = true
-        searchTextField.layer.cornerRadius = 12
+        searchTextField.layer.cornerRadius = 10
         searchTextField.backgroundColor = .systemGray4
+        searchTextField.textAlignment = .right
+        
+        NSLayoutConstraint.activate([
+        
+            searchTextField.leftAnchor.constraint(equalTo: view.leftAnchor , constant: 40) ,
+            searchTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40) ,
+            searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
+        
+        ])
         
     }
+    
+    
 
 
 }
