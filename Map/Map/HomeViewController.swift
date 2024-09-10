@@ -7,7 +7,7 @@
 
 import UIKit
 import MapKit
-import CoreLocation
+
 
 class HomeViewController: UIViewController  {
     
@@ -107,16 +107,15 @@ class HomeViewController: UIViewController  {
             print("User location is not available")
         }
     }
-    
 }
 
 extension HomeViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             if let location = locations.first {
-                let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-                let region = MKCoordinateRegion(center: location.coordinate, span: span)
-                mapView.setRegion(region, animated: true)
+//                let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+//                let region = MKCoordinateRegion(center: location.coordinate, span: span)
+//                mapView.setRegion(region, animated: true)
             }
         }
     
