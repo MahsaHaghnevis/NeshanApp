@@ -76,7 +76,7 @@ class HomeViewController: UIViewController  {
     private func setupSearchButton(){
         
         searchButton.setTitle("Search", for: .normal)
-        
+        searchButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         searchButton.backgroundColor = .systemBlue
         searchButton.setTitleColor(.white, for: .normal)
         searchButton.clipsToBounds = true
@@ -88,6 +88,7 @@ class HomeViewController: UIViewController  {
     private func setupLocateButton(){
         
         locationButton.setTitle("Locate", for: .normal)
+        locationButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         locationButton.backgroundColor = .systemGreen
         locationButton.setTitleColor(.white, for: .normal)
         locationButton.clipsToBounds = true
