@@ -19,7 +19,10 @@ class HomeViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .none
         view.addSubview(mapView)
