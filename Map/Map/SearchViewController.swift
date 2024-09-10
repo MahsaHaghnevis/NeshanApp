@@ -25,7 +25,7 @@ class SearchViewController: UIViewController {
         view.addSubview(tableView)
         
         setupSearchTextField()
-        setupTableUI()
+        setupTableView()
     }
     private func setupSearchTextField(){
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +46,7 @@ class SearchViewController: UIViewController {
         
     }
     
-    private func setupTableUI(){
+    private func setupTableView(){
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
