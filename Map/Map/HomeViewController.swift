@@ -28,6 +28,8 @@ class HomeViewController: UIViewController  {
         mapView.userTrackingMode = .none
         view.addSubview(mapView)
         view.addSubview(buttonsStak)
+        
+        locationButton.addTarget(self, action: #selector(locationButtonTapped), for: .touchUpInside)
         setupUI()
         
     }
@@ -93,6 +95,10 @@ class HomeViewController: UIViewController  {
         locationButton.setTitleColor(.white, for: .normal)
         locationButton.clipsToBounds = true
         locationButton.layer.cornerRadius = 16
+    }
+    
+    @objc func locationButtonTapped(_sender : UIButton){
+        
     }
 }
 
