@@ -107,6 +107,7 @@ class SearchViewController: UIViewController {
     @objc func showOnMapButtonTapped(){
         
         onShowOnMap?(searchResults)
+        navigationController?.popViewController(animated: true)
         
     }
     
