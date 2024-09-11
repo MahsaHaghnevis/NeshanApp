@@ -9,10 +9,10 @@ import UIKit
 import CoreLocation
 
 class SearchViewController: UIViewController {
-
+    
     let searchTextField = UITextField()
     let tableView = UITableView()
-
+    
     let showOnMapButton = UIButton(type: .system)
     
     let locationManager = CLLocationManager()
@@ -22,17 +22,17 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         setupLocationManager()
         setupUI()
     }
     
     private func setupLocationManager() {
-           locationManager.delegate = self
-           locationManager.requestWhenInUseAuthorization()
-           locationManager.startUpdatingLocation()
-       }
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
     
     
     private func setupUI(){
@@ -62,11 +62,11 @@ class SearchViewController: UIViewController {
         searchTextField.textAlignment = .right
         
         NSLayoutConstraint.activate([
-        
+            
             searchTextField.leftAnchor.constraint(equalTo: view.leftAnchor , constant: 40) ,
             searchTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40) ,
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
-        
+            
         ])
         
         searchTextField.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
@@ -77,11 +77,11 @@ class SearchViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-                   tableView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 20),
-                   tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                   tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                   tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-               ])
+            tableView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 20),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     
@@ -119,10 +119,15 @@ class SearchViewController: UIViewController {
     
     private func fetchSearchResults(query : String ){
         
-        
+        guard let userLocation = userLocation else {
+            print("User location is not available")
+            return
+        }
+        let latitude = userLocation.coordinate.latitude
+        let longitude = userLocation.coordinate.longitude
         let apiconf = APIconf()
         
-        let urlString = "\(apiconf.baseURL)term=\(query)&lat=35.6892&lng=51.3890"
+        let urlString = "\(apiconf.baseURL)term=\(query)&lat=\(latitude)&lng=\(longitude)"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -130,28 +135,24 @@ class SearchViewController: UIViewController {
         request.addValue(apiconf.apiKey, forHTTPHeaderField: "Api-Key")
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            guard let self = self, let data = data, error == nil else { return }
-            
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                let items = json["items"] as? [[String: Any]] {
-                              
-                              self.searchResults = items.compactMap { $0["title"] as? SearchResult }
-                              
-                              DispatchQueue.main.async {
-                                  self.tableView.reloadData()
-                              }
-                          }
-                      } catch {
-                          print("Error parsing JSON: \(error)")
-                      }
-                  }
-                  task.resume()
-            
+                   guard let self = self, let data = data, error == nil else { return }
+
+                   do {
+                       let searchResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
+                       self.searchResults = searchResponse.items
+
+                       DispatchQueue.main.async {
+                           self.tableView.reloadData()
+                       }
+                   } catch {
+                       print("Error parsing JSON: \(error)")
+                   }
+               }
+               task.resume()
+           }
         
     }
 
-}
 extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
