@@ -22,6 +22,8 @@ class SearchViewController: UIViewController {
     
     var savedLocations: [SearchResult] = []
     
+    var isTyping = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,9 +126,15 @@ class SearchViewController: UIViewController {
     
     
     @objc func searchTextChanged(_ sender : Any){
-        guard let query = searchTextField.text, !query.isEmpty else { return }
         
-        fetchSearchResults(query: query)
+        isTyping = !(searchTextField.text?.isEmpty ?? true)
+        
+        if isTyping {
+            guard let query = searchTextField.text, !query.isEmpty else { return }
+            fetchSearchResults(query: query)
+        }else{
+            tableView.reloadData()
+        }
     }
     
     private func fetchSearchResults(query : String ){
@@ -170,13 +178,14 @@ class SearchViewController: UIViewController {
 extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        searchResults.count
+        return isTyping ? searchResults.count : savedLocations.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
-        cell.textLabel?.text = searchResults[indexPath.row].title
+        let data = isTyping ? searchResults[indexPath.row] : savedLocations[indexPath.row]
+        cell.textLabel?.text = data.title
         cell.textLabel?.textAlignment = .right
         
         return cell
@@ -184,7 +193,7 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedLocation = searchResults[indexPath.row]
+        let selectedLocation = isTyping ? searchResults[indexPath.row] : savedLocations[indexPath.row]
        // print(searchResults[indexPath.row].title)
         
         let detailVC = LocationDetailViewController()
