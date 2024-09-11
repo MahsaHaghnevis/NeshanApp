@@ -43,7 +43,14 @@ class LocationDetailViewController: UIViewController {
             saveButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-    @objc private func saveButtonTapped(_ sender: UIButton) {}
+    @objc private func saveButtonTapped(_ sender: UIButton) {
+        
+        guard let location = location else {
+                print("Error: Location is nil")
+                return
+            }
+        
+    }
     
     private func setupUI(){
         
