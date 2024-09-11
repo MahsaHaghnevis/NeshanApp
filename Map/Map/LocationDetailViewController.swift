@@ -67,7 +67,15 @@ class LocationDetailViewController: UIViewController {
     }
     
     private func saveLocationToFavorites(location: SearchResult) {
+        let defaults = UserDefaults.standard
         
+        if let savedData = defaults.data(forKey: "favoriteLocations") {
+            var savedLocations = (try? JSONDecoder().decode([SearchResult].self, from: savedData)) ?? []
+            
+            if savedLocations.contains(where: { $0.location.x == location.location.x && $0.location.y == location.location.y }) {
+                showErrorAlert(message: "این مکان قبلاً ذخیره شده است.")
+                return}
+        }
     }
     
     private func setupUI(){
