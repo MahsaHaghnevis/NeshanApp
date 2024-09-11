@@ -60,7 +60,14 @@ class LocationDetailViewController: UIViewController {
         
     }
     
-    private func saveLocationToFavorites(location: SearchResult) {}
+    private func saveLocationToFavorites(location: SearchResult) {
+    
+        let defaults = UserDefaults.standard
+
+        
+        
+        
+    }
     
     private func setupUI(){
         
