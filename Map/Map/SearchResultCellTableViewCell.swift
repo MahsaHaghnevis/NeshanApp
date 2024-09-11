@@ -38,6 +38,12 @@ class SearchResultCellTableViewCell: UITableViewCell {
     
     private func setupSubtitleLabel(){
         
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.font = UIFont.systemFont(ofSize: 14)
+        subtitleLabel.textColor = .gray
+        subtitleLabel.textAlignment = .right
+        contentView.addSubview(subtitleLabel)
+        
     }
     
     private func setupiconImageView(){
