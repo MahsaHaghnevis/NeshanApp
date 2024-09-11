@@ -111,6 +111,9 @@ class HomeViewController: UIViewController  {
     
     @objc func searchButtonTapped(_ sender : UIButton){
         let searchVC = SearchViewController()
+        searchVC.onShowOnMap = { [weak self] results in
+            self?.displayResultsOnMap(results)
+        }
         navigationController?.pushViewController(searchVC, animated: true)
     }
 }
@@ -151,16 +154,46 @@ extension HomeViewController : CLLocationManagerDelegate {
     
     
     
-    private func showSearchViewController() {
-        let searchVC = SearchViewController()
-        searchVC.onShowOnMap = { [weak self] results in
-            self?.displayResultsOnMap(results)
+    private func displayResultsOnMap(_ results: [SearchResult]) {
+        mapView.removeAnnotations(mapView.annotations)
+        
+        var annotations: [MKPointAnnotation] = []
+        
+        for result in results {
+            let annotation = MKPointAnnotation()
+            annotation.title = result.title
+            annotation.coordinate = CLLocationCoordinate2D(latitude: result.location.y, longitude: result.location.x)
+            annotations.append(annotation)
         }
-        present(searchVC, animated: true, completion: nil)
+        
+        mapView.addAnnotations(annotations)
+        
+       
+        zoomToFitAnnotations(annotations)
+
     }
     
-    private func displayResultsOnMap(_ results: [SearchResult]) {
-      
+    private func zoomToFitAnnotations(_ annotations: [MKPointAnnotation]) {
+        guard !annotations.isEmpty else { return }
+        
+        var minLat = annotations.first!.coordinate.latitude
+        var maxLat = annotations.first!.coordinate.latitude
+        var minLng = annotations.first!.coordinate.longitude
+        var maxLng = annotations.first!.coordinate.longitude
+        
+        for annotation in annotations {
+            minLat = min(minLat, annotation.coordinate.latitude)
+            maxLat = max(maxLat, annotation.coordinate.latitude)
+            minLng = min(minLng, annotation.coordinate.longitude)
+            maxLng = max(maxLng, annotation.coordinate.longitude)
+        }
+        
+        let region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2, longitude: (minLng + maxLng) / 2),
+            span: MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.5, longitudeDelta: (maxLng - minLng) * 1.5)
+        )
+        
+        mapView.setRegion(region, animated: true)
     }
 }
 
