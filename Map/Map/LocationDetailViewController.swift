@@ -49,6 +49,7 @@ class LocationDetailViewController: UIViewController {
     
     
     func saveLocationToFavorites(location: SearchResult) {
+        let defaults = UserDefaults.standard
         
         
     }
