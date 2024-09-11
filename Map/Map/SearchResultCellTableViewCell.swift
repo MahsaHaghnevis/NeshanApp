@@ -30,7 +30,10 @@ class SearchResultCellTableViewCell: UITableViewCell {
     }
     
     private func setupTitleLabel(){
-        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        titleLabel.textAlignment = .right
+        contentView.addSubview(titleLabel)
     }
     
     private func setupSubtitleLabel(){
