@@ -167,13 +167,23 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
         cell.textLabel?.text = searchResults[indexPath.row].title
         
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print(searchResults[indexPath.row].title)
+        let selectedLocation = searchResults[indexPath.row]
+       // print(searchResults[indexPath.row].title)
+        
+        let detailVC = LocationDetailViewController()
+        detailVC.locationTitle = selectedLocation.title
+        detailVC.locationDescription = selectedLocation.address
+        
+        navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    
     
     
 }

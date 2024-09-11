@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationPinDetailViewController: UIViewController {
+class LocationDetailViewController: UIViewController {
 
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -38,5 +38,5 @@ class LocationPinDetailViewController: UIViewController {
         descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
-    
+   
 }
