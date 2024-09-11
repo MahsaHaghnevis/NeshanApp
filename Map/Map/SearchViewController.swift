@@ -166,7 +166,7 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
         cell.textLabel?.text = searchResults[indexPath.row].title
-        
+        cell.textLabel?.textAlignment = .right
         
         return cell
     }
