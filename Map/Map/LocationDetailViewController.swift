@@ -60,12 +60,13 @@ class LocationDetailViewController: UIViewController {
         
     }
     
-    private func saveLocationToFavorites(location: SearchResult) {
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "خطا", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "باشه", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
-        let defaults = UserDefaults.standard
-
-        
-        
+    private func saveLocationToFavorites(location: SearchResult) {
         
     }
     
