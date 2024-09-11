@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class LocationDetailViewController: UIViewController {
     
     let titleLabel = UILabel()
@@ -117,3 +118,5 @@ class LocationDetailViewController: UIViewController {
             descriptionLabel.text = locationDescription
         }
 }
+
+
