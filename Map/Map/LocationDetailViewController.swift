@@ -75,9 +75,25 @@ class LocationDetailViewController: UIViewController {
             if savedLocations.contains(where: { $0.location.x == location.location.x && $0.location.y == location.location.y }) {
                 showErrorAlert(message: "این مکان قبلاً ذخیره شده است.")
                 return}
+            
+            savedLocations.append(location)
+            
+            if let encodedLocations = try? JSONEncoder().encode(savedLocations) {
+                defaults.set(encodedLocations, forKey: "favoriteLocations")
+                print("Location saved successfully.")
+            } else {
+                print("Error encoding locations.")
+            }
+        } else {
+            if let encodedLocation = try? JSONEncoder().encode([location]) {
+                defaults.set(encodedLocation, forKey: "favoriteLocations")
+                print("First location saved successfully.")
+            } else {
+                print("Error encoding first location.")
+            }
+            
         }
     }
-    
     private func setupUI(){
         
         view.addSubview(titleLabel)
