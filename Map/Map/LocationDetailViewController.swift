@@ -8,12 +8,14 @@
 import UIKit
 
 class LocationDetailViewController: UIViewController {
-
+    
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
-        
-     var locationTitle: String?
-     var locationDescription: String?
+    let saveButton = UIButton(type: .system)
+    
+    
+    var locationTitle: String?
+    var locationDescription: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +23,25 @@ class LocationDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupUI()
         updateUI()
+        setUpButton()
     }
-    
+    private func setUpButton(){
+        saveButton.setTitle("ذخیره", for: .normal)
+        saveButton.backgroundColor = .systemGreen
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.layer.cornerRadius = 10
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+            
+        view.addSubview(saveButton)
+            
+        NSLayoutConstraint.activate([
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveButton.widthAnchor.constraint(equalToConstant: 150),
+            saveButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
     private func setupUI(){
         
         view.addSubview(titleLabel)
