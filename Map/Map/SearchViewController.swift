@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SearchViewController: UIViewController {
 
@@ -14,6 +15,8 @@ class SearchViewController: UIViewController {
 
     let showOnMapButton = UIButton(type: .system)
     
+    let locationManager = CLLocationManager()
+    var userLocation: CLLocation?
     
     var searchResults: [SearchResult] = []
     
@@ -158,4 +161,13 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     
+}
+
+extension SearchViewController : CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            if let location = locations.last {
+                userLocation = location
+            }
+        }
 }
