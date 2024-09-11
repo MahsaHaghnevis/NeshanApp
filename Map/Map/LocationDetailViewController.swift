@@ -53,10 +53,7 @@ class LocationDetailViewController: UIViewController {
         print("Saving location: \(location.title), \(location.address), Coordinates: (\(location.location.x), \(location.location.y))")
         
         saveLocationToFavorites(location: location)
-        
-        let alert = UIAlertController(title: "موفقیت", message: "مکان با موفقیت ذخیره شد.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "باشه", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+  
         
     }
     
@@ -93,6 +90,9 @@ class LocationDetailViewController: UIViewController {
             }
             
         }
+        let alert = UIAlertController(title: "موفقیت", message: "مکان با موفقیت ذخیره شد.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "باشه", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
     }
     private func setupUI(){
         
