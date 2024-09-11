@@ -38,7 +38,13 @@ class SearchResultCellTableViewCell: UITableViewCell {
     }
     
     private func setupiconImageView(){
-        
+        let image = UIImage(systemName: "house")
+        iconImageView.image = image
+        iconImageView.translatesAutoresizingMaskIntoConstraints = false
+        iconImageView.contentMode = .scaleAspectFit
+        iconImageView.layer.cornerRadius = 8
+        iconImageView.clipsToBounds = true
+        contentView.addSubview(iconImageView)
     }
     
 }

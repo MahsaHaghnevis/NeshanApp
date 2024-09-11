@@ -9,5 +9,5 @@ import Foundation
 
 struct Location : Codable {
     let x: Double
-    let y: Double 
+    let y: Double
 }
