@@ -13,7 +13,7 @@ class LocationDetailViewController: UIViewController {
     let descriptionLabel = UILabel()
     let saveButton = UIButton(type: .system)
     
-    
+    var location: SearchResult?
     var locationTitle: String?
     var locationDescription: String?
     
@@ -43,29 +43,57 @@ class LocationDetailViewController: UIViewController {
             saveButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-    
-    @objc private func saveButtonTapped(_sender : UIButton){
+    @objc private func saveButtonTapped(_ sender: UIButton) {
+        
+        guard let location = location else {
+                print("Error: Location is nil")
+                return
+            }
+        
+        print("Saving location: \(location.title), \(location.address), Coordinates: (\(location.location.x), \(location.location.y))")
+        
+        saveLocationToFavorites(location: location)
+  
         
     }
     
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "خطا", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "باشه", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
-    func saveLocationToFavorites(location: SearchResult) {
+    private func saveLocationToFavorites(location: SearchResult) {
         let defaults = UserDefaults.standard
         
-        if let savedLocations = defaults.object(forKey: "favoriteLocations") as? Data {
-            var locations = try? JSONDecoder().decode([SearchResult].self, from: savedLocations)
-            locations?.append(location)
-            if let encodedLocations = try? JSONEncoder().encode(locations) {
+        if let savedData = defaults.data(forKey: "favoriteLocations") {
+            var savedLocations = (try? JSONDecoder().decode([SearchResult].self, from: savedData)) ?? []
+            
+            if savedLocations.contains(where: { $0.location.x == location.location.x && $0.location.y == location.location.y }) {
+                showErrorAlert(message: "این مکان قبلاً ذخیره شده است.")
+                return}
+            
+            savedLocations.append(location)
+            
+            if let encodedLocations = try? JSONEncoder().encode(savedLocations) {
                 defaults.set(encodedLocations, forKey: "favoriteLocations")
+                print("Location saved successfully.")
+            } else {
+                print("Error encoding locations.")
             }
         } else {
             if let encodedLocation = try? JSONEncoder().encode([location]) {
                 defaults.set(encodedLocation, forKey: "favoriteLocations")
+                print("First location saved successfully.")
+            } else {
+                print("Error encoding first location.")
             }
+            
         }
-        
+        let alert = UIAlertController(title: "موفقیت", message: "مکان با موفقیت ذخیره شد.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "باشه", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
     }
-    
     private func setupUI(){
         
         view.addSubview(titleLabel)
@@ -73,7 +101,8 @@ class LocationDetailViewController: UIViewController {
                 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-                
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        descriptionLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         NSLayoutConstraint.activate([
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
