@@ -54,6 +54,10 @@ class LocationDetailViewController: UIViewController {
         
         saveLocationToFavorites(location: location)
         
+        let alert = UIAlertController(title: "موفقیت", message: "مکان با موفقیت ذخیره شد.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "باشه", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     private func saveLocationToFavorites(location: SearchResult) {}
