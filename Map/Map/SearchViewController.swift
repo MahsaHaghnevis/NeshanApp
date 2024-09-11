@@ -20,12 +20,23 @@ class SearchViewController: UIViewController {
     
     var searchResults: [SearchResult] = []
     
+    var savedLocations: [SearchResult] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         setupLocationManager()
         setupUI()
+        loadSavedLocations()
+    }
+    
+    private func loadSavedLocations() {
+        let defaults = UserDefaults.standard
+        if let savedData = defaults.data(forKey: "favoriteLocations") {
+            savedLocations = (try? JSONDecoder().decode([SearchResult].self, from: savedData)) ?? []
+            tableView.reloadData()
+        }
     }
     
     private func setupLocationManager() {
