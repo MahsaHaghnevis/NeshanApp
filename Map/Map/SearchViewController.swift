@@ -30,6 +30,7 @@ class SearchViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(showOnMapButton)
         
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -103,14 +104,17 @@ class SearchViewController: UIViewController {
         fetchSearchResults(query: query)
     }
     
-    private func fetchSearchResults(query : String){
+    private func fetchSearchResults(query : String ){
         
-        let urlString = "https://api.neshan.org/v1/search?term=\(query)&lat=35.6892&lng=51.3890"
+        
+        let apiconf = APIconf()
+        
+        let urlString = "\(apiconf.baseURL)term=\(query)&lat=35.6892&lng=51.3890"
         
         guard let url = URL(string: urlString) else { return }
         
         var request = URLRequest (url : url)
-        request.setValue("service.29a629cc9ebc4851958f7a9cefea43b0", forHTTPHeaderField: "Api-Key")
+        request.addValue(apiconf.apiKey, forHTTPHeaderField: "Api-Key")
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self, let data = data, error == nil else { return }

@@ -6,6 +6,7 @@
 //
 
 struct SearchResult {
+    
     let title: String
     let address: String
     let latitude: Double
