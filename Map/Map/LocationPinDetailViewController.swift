@@ -24,6 +24,19 @@ class LocationPinDetailViewController: UIViewController {
     
     private func setupUI(){
         
+        view.addSubview(titleLabel)
+        view.addSubview(descriptionLabel)
+                
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+                
+        NSLayoutConstraint.activate([
+        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                    
+        descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+        descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     
 }
