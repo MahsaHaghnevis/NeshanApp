@@ -53,6 +53,15 @@ class SearchResultCellTableViewCell: UITableViewCell {
         iconImageView.contentMode = .scaleAspectFit
         iconImageView.layer.cornerRadius = 8
         iconImageView.clipsToBounds = true
+        
+        
+        NSLayoutConstraint.activate([
+                   iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+                   iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                   iconImageView.widthAnchor.constraint(equalToConstant: 40),
+                   iconImageView.heightAnchor.constraint(equalToConstant: 40)
+                   
+                   ])
         contentView.addSubview(iconImageView)
     }
     
