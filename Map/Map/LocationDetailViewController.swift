@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MapKit
 
-class LocationDetailViewController: UIViewController {
+class LocationDetailViewController: UIViewController , CLLocationManagerDelegate {
     
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
@@ -16,6 +17,12 @@ class LocationDetailViewController: UIViewController {
     var location: SearchResult?
     var locationTitle: String?
     var locationDescription: String?
+    
+    
+    let mapView = MKMapView()
+    let locationManager = CLLocationManager()
+    var userLocation: CLLocation?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
