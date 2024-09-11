@@ -24,9 +24,17 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
-        
+        setupLocationManager()
         setupUI()
     }
+    
+    private func setupLocationManager() {
+           locationManager.delegate = self
+           locationManager.requestWhenInUseAuthorization()
+           locationManager.startUpdatingLocation()
+       }
+    
+    
     private func setupUI(){
         
         view.addSubview(searchTextField)
@@ -75,6 +83,8 @@ class SearchViewController: UIViewController {
                    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                ])
     }
+    
+    
     
     private func setupShowOnMapButton() {
         showOnMapButton.setTitle("Show on Map", for: .normal)
