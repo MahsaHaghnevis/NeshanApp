@@ -50,7 +50,13 @@ class LocationDetailViewController: UIViewController {
                 return
             }
         
+        print("Saving location: \(location.title), \(location.address), Coordinates: (\(location.location.x), \(location.location.y))")
+        
+        saveLocationToFavorites(location: location)
+        
     }
+    
+    private func saveLocationToFavorites(location: SearchResult) {}
     
     private func setupUI(){
         
