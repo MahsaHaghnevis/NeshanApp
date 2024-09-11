@@ -34,6 +34,14 @@ class SearchResultCellTableViewCell: UITableViewCell {
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         titleLabel.textAlignment = .right
         contentView.addSubview(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10)])
+
+        
     }
     
     private func setupSubtitleLabel(){
@@ -44,6 +52,12 @@ class SearchResultCellTableViewCell: UITableViewCell {
         subtitleLabel.textAlignment = .right
         contentView.addSubview(subtitleLabel)
         
+        NSLayoutConstraint.activate([
+            subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+                        subtitleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10),
+                        subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+                        subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)])
+           
     }
     
     private func setupiconImageView(){
