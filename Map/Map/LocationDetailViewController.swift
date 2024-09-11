@@ -47,6 +47,12 @@ class LocationDetailViewController: UIViewController {
         
     }
     
+    
+    func saveLocationToFavorites(location: SearchResult) {
+        
+        
+    }
+    
     private func setupUI(){
         
         view.addSubview(titleLabel)
