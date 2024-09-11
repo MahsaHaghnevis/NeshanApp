@@ -42,6 +42,11 @@ class LocationDetailViewController: UIViewController {
             saveButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
+    
+    @objc private func saveButtonTapped(_sender : UIButton){
+        
+    }
+    
     private func setupUI(){
         
         view.addSubview(titleLabel)
