@@ -123,6 +123,8 @@ class SearchViewController: UIViewController {
             print("User location is not available")
             return
         }
+        
+        
         let latitude = userLocation.coordinate.latitude
         let longitude = userLocation.coordinate.longitude
         let apiconf = APIconf()
@@ -163,6 +165,7 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
         cell.textLabel?.text = searchResults[indexPath.row].title
+        
         return cell
     }
     

@@ -11,7 +11,3 @@ struct SearchResult :Codable {
     let address: String
     let location : Location
 }
-
-
-
-
