@@ -1,5 +1,5 @@
 //
-//  LocationPinDetailViewController.swift
+//  LocationDetailViewController.swift
 //  Map
 //
 //  Created by Mahsa on 9/11/24.
