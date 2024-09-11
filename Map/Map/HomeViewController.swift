@@ -91,7 +91,7 @@ class HomeViewController: UIViewController  {
     
     private func setupLocateButton(){
         
-        locationButton.setTitle("Locate", for: .normal)
+        locationButton.setTitle("Find me", for: .normal)
         locationButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         locationButton.backgroundColor = .systemGreen
         locationButton.setTitleColor(.white, for: .normal)
