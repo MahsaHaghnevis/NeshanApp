@@ -13,7 +13,7 @@ class LocationDetailViewController: UIViewController {
     let descriptionLabel = UILabel()
     let saveButton = UIButton(type: .system)
     
-    
+    var location: SearchResult?
     var locationTitle: String?
     var locationDescription: String?
     
@@ -43,28 +43,7 @@ class LocationDetailViewController: UIViewController {
             saveButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
-    
-    @objc private func saveButtonTapped(_sender : UIButton){
-        
-    }
-    
-    
-    func saveLocationToFavorites(location: SearchResult) {
-        let defaults = UserDefaults.standard
-        
-        if let savedLocations = defaults.object(forKey: "favoriteLocations") as? Data {
-            var locations = try? JSONDecoder().decode([SearchResult].self, from: savedLocations)
-            locations?.append(location)
-            if let encodedLocations = try? JSONEncoder().encode(locations) {
-                defaults.set(encodedLocations, forKey: "favoriteLocations")
-            }
-        } else {
-            if let encodedLocation = try? JSONEncoder().encode([location]) {
-                defaults.set(encodedLocation, forKey: "favoriteLocations")
-            }
-        }
-        
-    }
+    @objc private func saveButtonTapped(_ sender: UIButton) {}
     
     private func setupUI(){
         
@@ -73,7 +52,8 @@ class LocationDetailViewController: UIViewController {
                 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-                
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        descriptionLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         NSLayoutConstraint.activate([
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),

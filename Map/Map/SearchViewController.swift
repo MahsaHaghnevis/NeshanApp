@@ -179,7 +179,7 @@ extension SearchViewController : UITableViewDataSource, UITableViewDelegate {
         let detailVC = LocationDetailViewController()
         detailVC.locationTitle = selectedLocation.title
         detailVC.locationDescription = selectedLocation.address
-        
+        detailVC.location = selectedLocation
         navigationController?.pushViewController(detailVC, animated: true)
     }
 
