@@ -27,6 +27,7 @@ class LocationDetailViewController: UIViewController {
     }
     private func setUpButton(){
         saveButton.setTitle("ذخیره", for: .normal)
+        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         saveButton.backgroundColor = .systemGreen
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.layer.cornerRadius = 10
@@ -51,6 +52,17 @@ class LocationDetailViewController: UIViewController {
     func saveLocationToFavorites(location: SearchResult) {
         let defaults = UserDefaults.standard
         
+        if let savedLocations = defaults.object(forKey: "favoriteLocations") as? Data {
+            var locations = try? JSONDecoder().decode([SearchResult].self, from: savedLocations)
+            locations?.append(location)
+            if let encodedLocations = try? JSONEncoder().encode(locations) {
+                defaults.set(encodedLocations, forKey: "favoriteLocations")
+            }
+        } else {
+            if let encodedLocation = try? JSONEncoder().encode([location]) {
+                defaults.set(encodedLocation, forKey: "favoriteLocations")
+            }
+        }
         
     }
     
