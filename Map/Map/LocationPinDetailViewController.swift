@@ -20,6 +20,7 @@ class LocationDetailViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         setupUI()
+        updateUI()
     }
     
     private func setupUI(){
@@ -39,4 +40,8 @@ class LocationDetailViewController: UIViewController {
         ])
     }
    
+    private func updateUI() {
+            titleLabel.text = locationTitle
+            descriptionLabel.text = locationDescription
+        }
 }
